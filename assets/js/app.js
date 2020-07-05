@@ -1,140 +1,62 @@
-var playing = false;
+var playing;
 var score;
-var action;
-var timeremaining;
-var correctAnswer;
+var trialsLeft;
+
+$(function(){
+    //click on start reset button
+    $("#startreset").click(function(){
+
+   //are we playing?
+        if(playing == true){
+            //reload page
+            location.reload();
+
+        }else{
+            //we are not playing
+            playing = true; //game initiated
+            //set score to 0
+            score = 0;
+            $("#scorevalue").html(score);
+
+            //show trials left
+            $("#trialsleft").show();
+            trialsLeft = 3;
+            addHearts();
 
 
-//if we click on the start/reset button
-document.getElementById("startreset").onclick = function(){
-    //if we are playing
-    if(playing == true){
-    location.reload(); //reload page
-
-    //if we are not playing
-    }else{
-        //reload page
-        playing = true;
-        //set score to 0
-        score = 0;
-
-document.getElementById("scorevalue").innerHTML = score;
-
-//show countdown box
-        show("timeremaining");
-        timeremaining = 60;
-
-document.getElementById("timeremainingvalue").innerHTML = timeremaining;
-
-//hide game over box
-        hide("gameOver");
-
-//change button to reset
-document.getElementById("startreset").innerHTML = "Reset Game";
-
-//start countdown
-startCountDown();
-
-//generate new Q&Q
-generateQA();
-
-
-}
-}
-
-for(i=1; i<5; i++){
-    document.getElementById("box"+i).onclick = function(){
-        //check if we are playing
-        if(playing==true){//yes
-            if(this.innerHTML == correctAnswer){
-                //correct answer
-                score++;
-                document.getElementById("scorevalue").innerHTML = score;
-    
-                //hide wrong box and show correct box
-                hide("wrong");
-                show("correct");
-                setTimeout(function(){
-                    hide("correct")
-                }, 1000)
-    
-                //generate new Q&A
-                generateQA();
-    
-            }else{
-                //wrong answer
-                hide("correct");
-                show("wrong");
-                setTimeout(function(){
-                    hide("wrong")
-                }, 1000)  
-            }  
-        }
-    }
-}
-
- //functions           
-
- //start counter
-function startCountDown(){
-    action = setInterval(function(){
-        timeremaining -= 1;
-
-document.getElementById("timeremainingvalue").innerHTML = timeremaining;
-        if(timeremaining == 0) {//game over
-            stopCountDown();
-            show("gameOver");
-
-document.getElementById('gameOver').innerHTML = "<p>game over!</p><p>your score is " + score + ".</p> ";
-        hide("timeremaining");
-        hide("correct");
-        hide("wrong");
-        playing = false;
-        document.getElementById("startreset").innerHTML = "Start Game";
-        }
-    }, 1000);
-}
-
-//stop counter
-function stopCountDown(){
-    clearInterval(action);
-}
-
-//hide element
-function hide(Id){
-    document.getElementById(Id).style.display = "none";
-}
-
-//show element
-function show(Id){
-    document.getElementById(Id).style.display = "block";
-}
-
-//generateQ&A
-function generateQA(){
-    var x = 1 + Math.round(9*Math.random());
-    var y = 1 + Math.round(9*Math.random());
-    correctAnswer = x*y;
-
-    document.getElementById("question").innerHTML = x + "x" + y;
-    var correctPosition = 1 + Math.round(3*Math.random());
-    document.getElementById("box"+correctPosition).innerHTML = correctAnswer;//fill one box with correct answer
-
-    //fill other boxes with wrong answers
-
-var answers = [correctAnswer]
-
-    for(i=1; i<5; i++){
-       if(i != correctPosition){
-           var wrongAnswer;
-           do{
-            wrongAnswer = (1 + Math.round(9*Math.random())) * (1 + Math.round(9*Math.random()));//wrong answer
             
-           }while(answers.indexOf(wrongAnswer)>-1)
 
-           document.getElementById("box"+i).innerHTML = wrongAnswer;
-           answers.push(wrongAnswer);
 
-       } 
-    }
+        }
+    });
+
+});
+
+
+
+
+
+         
+      //no
+         //show trials left
+         //change button text
+//to reset game
+         //1. create a random fruit
+         //define a random step
+         //2. more fruit down one step every 30 sec
+            //is fruit too low?
+               //no -> repeat #2
+               //yes -> any trials left?
+                  //yes -> repeat #1
+                  //no -> show game over, button text -> start game
+
+//slice fruit
+   //play sound
+   //explode fruit
+
+   //functions
+   function addHearts (){
+    for(i = 0; i < trialsLeft; i ++){
+        $("#trialsleft").append(" X ");
+   }
 }
