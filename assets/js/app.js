@@ -1,7 +1,8 @@
 var playing = false;
 var score;
 var action;
-var timeremaining
+var timeremaining;
+var correctAnswer;
 
 
 //if we click on the start/reset button
@@ -101,5 +102,27 @@ function show(Id){
 
 //generateQ&A
 function generateQA(){
-    
+    var x = 1 + Math.round(9*Math.random());
+    var y = 1 + Math.round(9*Math.random());
+    correctAnswer = x*y;
+
+    document.getElementById("question").innerHTML = x + "x" + y;
+    var correctPosition = 1 + Math.round(3*Math.random());
+    document.getElementById("box"+correctPosition).innerHTML = correctAnswer;//fill one box with correct answer
+
+    //fill other boxes with wrong answers
+
+var answers = [correctAnswer]
+
+    for(i=1; i<5; i++){
+       if(i != correctPosition){
+           var wrongAnswer;
+           do{
+            wrongAnswer = (1 + Math.round(9*Math.random())) * (1 + Math.round(9*Math.random()));//wrong answer
+            document.getElementById("box"+i).innerHTML = wrongAnswer;
+           }while(wrongAnswer== correctAnswer)
+
+       } 
+    }
+
 }
