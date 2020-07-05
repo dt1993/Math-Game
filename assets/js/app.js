@@ -67,23 +67,11 @@ for(i=1; i<5; i++){
                 show("wrong");
                 setTimeout(function(){
                     hide("wrong")
-                }, 1000)
-    
-            }
-    
+                }, 1000)  
+            }  
         }
     }
 }
-
-//if we click on an answer box
-    //if we are playing
-       //correct?
-            //yes
-                //increase score 
-                //show correct box for 1 sec
-                //generate new Q&A
-            //no
-                //show try again box
 
  //functions           
 
