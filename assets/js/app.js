@@ -22,7 +22,7 @@ document.getElementById("scorevalue").innerHTML = score;
 
 //show countdown box
         show("timeremaining");
-        timeremaining = 5;
+        timeremaining = 60;
 
 document.getElementById("timeremainingvalue").innerHTML = timeremaining;
 
@@ -41,17 +41,39 @@ generateQA();
 
 }
 }
-        
-  
-       
-       
-       //reduce time by 1 sec in loops
-             //time left?
-                 //yes -> continue
-                 //no -> gameover
-       
-       //generate new Q&A
 
+for(i=1; i<5; i++){
+    document.getElementById("box"+i).onclick = function(){
+        //check if we are playing
+        if(playing==true){//yes
+            if(this.innerHTML == correctAnswer){
+                //correct answer
+                score++;
+                document.getElementById("scorevalue").innerHTML = score;
+    
+                //hide wrong box and show correct box
+                hide("wrong");
+                show("correct");
+                setTimeout(function(){
+                    hide("correct")
+                }, 1000)
+    
+                //generate new Q&A
+                generateQA();
+    
+            }else{
+                //wrong answer
+                hide("correct");
+                show("wrong");
+                setTimeout(function(){
+                    hide("wrong")
+                }, 1000)
+    
+            }
+    
+        }
+    }
+}
 
 //if we click on an answer box
     //if we are playing
@@ -119,10 +141,12 @@ var answers = [correctAnswer]
            var wrongAnswer;
            do{
             wrongAnswer = (1 + Math.round(9*Math.random())) * (1 + Math.round(9*Math.random()));//wrong answer
-            document.getElementById("box"+i).innerHTML = wrongAnswer;
-           }while(wrongAnswer== correctAnswer)
+            
+           }while(answers.indexOf(wrongAnswer)>-1)
+
+           document.getElementById("box"+i).innerHTML = wrongAnswer;
+           answers.push(wrongAnswer);
 
        } 
     }
-
 }
